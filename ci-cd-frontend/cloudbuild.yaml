@@ -18,7 +18,7 @@ steps:
       - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
       - --cache-from
       - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:latest
-      - ./ci-cd-frontend/Dockerfile
+      - /workspace/ci-cd-frontend/Dockerfile
   - name: gcr.io/cloud-builders/docker
     id: Push
     args:
