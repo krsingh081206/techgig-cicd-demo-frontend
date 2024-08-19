@@ -1,0 +1,34 @@
+---
+# TEST BUILD PIPELINE
+options:
+  logging: CLOUD_LOGGING_ONLY
+steps:
+  - name: gcr.io/cloud-builders/docker
+    id: Pull
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        docker pull us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:latest || exit 0
+  - name: gcr.io/cloud-builders/docker
+    id: Build
+    args:
+      - build
+      - -t
+      - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
+      - --cache-from
+      - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:latest
+      - .
+  - name: gcr.io/cloud-builders/docker
+    id: Push
+    args:
+      - push
+      - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
+  - name: gcr.io/cloud-builders/gcloud
+    id: Tag
+    args:
+      - container
+      - images
+      - add-tag
+      - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
+      - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:latest
