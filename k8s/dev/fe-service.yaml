@@ -4,6 +4,7 @@ kind: Service
 
 metadata:
   name: ng-service
+  namespace: dev
   annotations:
     cloud.google.com/neg: '{"exposed_ports": {"80":{"name": "dev-ng-service-80-neg"}}}'
   labels:

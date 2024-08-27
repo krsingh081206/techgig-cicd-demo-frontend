@@ -4,6 +4,7 @@ kind: Deployment
 
 metadata:
   name: ng-deployment
+  namespace: dev
   labels:
     app: ng-deployment
 
