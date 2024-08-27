@@ -1,5 +1,4 @@
 ---
-# TEST BUILD PIPELINE
 options:
   logging: CLOUD_LOGGING_ONLY
 steps:
@@ -24,6 +23,51 @@ steps:
     args:
       - push
       - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
+  - name: gcr.io/cloud-builders/gcloud
+    id: Set image name
+    entrypoint: /bin/sh
+    args:
+      - -c
+      - >
+        sed -i "s/image: frontendvm/image: us-east4-docker.pkg.dev\/$PROJECT_ID\/techgig-cicd\/$_IMAGE:$SHORT_SHA/g"
+        k8s/$_ENVIRONMENT/fe-deployment.yaml
+  
+  - name: gcr.io/cloud-builders/gcloud
+    id: Authenticate kubernetes
+    args:
+      - container
+      - clusters
+      - get-credentials
+      - $_CLUSTER
+      - --region
+      - $_REGION
+      - --project
+      - $_GKE_PROJECT
+
+  - name: gcr.io/cloud-builders/kubectl
+    id: CreateNamespace
+    args:
+      - apply
+      - -f
+      - k8s/common/
+    env:
+      - CLOUDSDK_COMPUTE_REGION=${_REGION}
+      - CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}
+      - CLOUDSDK_CORE_PROJECT=${_GKE_PROJECT}
+
+  - name: gcr.io/cloud-builders/kubectl
+    id: Deploy Frontend
+    waitFor:
+      - 'CreateNamespace'
+    args:
+      - apply
+      - -f
+      - k8s/$_ENVIRONMENT/
+    env:
+      - CLOUDSDK_COMPUTE_REGION=${_REGION}
+      - CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER}
+      - CLOUDSDK_CORE_PROJECT=${_GKE_PROJECT}
+  
   - name: gcr.io/cloud-builders/gcloud
     id: Tag
     args:

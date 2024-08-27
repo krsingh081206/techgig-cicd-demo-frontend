@@ -1,0 +1,20 @@
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: ng-service
+  annotations:
+    cloud.google.com/neg: '{"exposed_ports": {"80":{"name": "dev-ng-service-80-neg"}}}'
+  labels:
+    app: ng-service
+    
+spec:
+  type: ClusterIP
+  ports:
+    - name: ng-service-port
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: ng-pod
