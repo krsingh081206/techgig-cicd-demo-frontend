@@ -35,10 +35,10 @@ spec:
           resources:
             requests:
               memory: "64Mi"
-              cpu: "125m"
+              cpu: "64m"
             limits:
               memory: "128Mi"
-              cpu: "250m"
+              cpu: "125m"
           command: ["/entrypoint.sh", "dev-gcp.hsc.com"]
           imagePullPolicy: Always
           ports:
