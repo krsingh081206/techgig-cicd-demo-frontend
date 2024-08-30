@@ -32,13 +32,6 @@ spec:
       containers:
         - name: ng-container
           image: frontendvm
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "64m"
-            limits:
-              memory: "128Mi"
-              cpu: "125m"
           command: ["/entrypoint.sh", "dev-gcp.hsc.com"]
           imagePullPolicy: Always
           ports:
