@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ProductsService } from './products.service';
 import { Product } from './product';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,8 @@ export class ProductsComponent implements OnInit {
   selectedProduct: Product = new Product();
   loading = false;
 
+  setup="test";
+
   constructor(public productService: ProductsService) {
   }
 
@@ -27,6 +30,7 @@ export class ProductsComponent implements OnInit {
     const data = await this.productService.getProducts();
     this.dataSource.data = data;
     this.loading = false;
+    this.setup = `${environment.setup}`;
   }
 
   async updateProduct() {
