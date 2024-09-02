@@ -76,3 +76,12 @@ steps:
       - add-tag
       - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
       - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:latest
+
+  - name: gcr.io/cloud-builders/gcloud
+    id: Release Tag
+    args:
+      - container
+      - images
+      - add-tag
+      - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
+      - us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$_RELEASE_NO
