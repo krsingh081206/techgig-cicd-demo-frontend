@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
   apiUrl : "https://{{SERVER_URL}}/api/product",
-  setup : "Development"
+  setup : "{{UI_ENVIRONMENT}}",
+  release : "{{UI_RELEASE}}"
 };

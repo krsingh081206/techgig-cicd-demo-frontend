@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl : "http://localhost:3000/api/product",
-  setup : "Development"
+  setup : "Development",
+  release : "1.0.0"
 };
 
 /*
