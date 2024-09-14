@@ -32,7 +32,7 @@ spec:
       containers:
         - name: ng-container
           image: frontendvm
-          command: ["/entrypoint.sh", "dev-gcp.hsc.com" , "Dev" , "7.0.0"]
+          command: ["/entrypoint.sh", "devinternal-gcp.hsc.com" , "Dev" , "7.0.0"]
           imagePullPolicy: Always
           ports:
             - containerPort: 80
