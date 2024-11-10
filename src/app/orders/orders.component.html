@@ -1,0 +1,61 @@
+<h1 class="h1">Order Summary</h1>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between stretch" class="orders">
+  <table mat-table fxFlex="100%" fxFlex.gt-sm="66%" [dataSource]="dataSource" class="mat-elevation-z1">
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> Category</th>
+      <td mat-cell *matCellDef="let order"> {{order.category}}</td>
+    </ng-container>
+    <ng-container matColumnDef="payment">
+      <th mat-header-cell *matHeaderCellDef> Payment</th>
+      <td mat-cell *matCellDef="let order"> {{order.payment}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description</th>
+      <td mat-cell *matCellDef="let order"> {{order.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef> Amount</th>
+      <td mat-cell *matCellDef="let order"> {{order.amount}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let order">
+        <button mat-icon-button (click)="editorder(order)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let order">
+        <button mat-icon-button (click)="deleteorder(order)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-divider fxShow="false" fxShow.gt-sm [vertical]="true"></mat-divider>
+  <div>
+    <h2>Selected Order</h2>
+    <label> Category
+      <input type="text" [(ngModel)]="selectedOrder.category">
+    </label>
+    <label>Payment
+      <input type="text" [(ngModel)]="selectedOrder.payment">
+    </label>
+    <label>Description
+      <input type="text" [(ngModel)]="selectedOrder.description">
+    </label>
+    <label>Amount
+      <input type="text" [(ngModel)]="selectedOrder.amount">
+    </label>
+    <button mat-flat-button color="primary" (click)="updateorder()">{{(selectedOrder.id!==undefined)?'Update':'Create'}}</button>
+    <button mat-flat-button color="primary" (click)="clearorder()">Clear</button>
+  </div>
+  <div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
