@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
+import { OrdersComponent } from './orders/orders.component';
 
 const oktaConfig = {
   issuer: 'https://dev-68606227.okta.com/oauth2/default',
@@ -30,7 +31,8 @@ const oktaConfig = {
   declarations: [
     AppComponent,
     ProductsComponent,
-    HomeComponent
+    HomeComponent,
+    OrdersComponent
   ],
   imports: [
     AppRoutingModule,

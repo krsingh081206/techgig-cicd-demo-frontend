@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl : "http://localhost:3000/api/product",
+  apiUrl : "https://dev-gcp.hsc.com/api/product",
+  orderapiUrl : "https://dev-gcp.hsc.com/api/orders",
   setup : "Development",
   release : "1.0.0"
 };

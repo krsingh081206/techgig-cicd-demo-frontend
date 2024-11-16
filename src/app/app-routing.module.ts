@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
+import { OrdersComponent } from './orders/orders.component';
 import { HomeComponent } from './home/home.component';
 import { OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
 
@@ -12,6 +13,11 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent,
+    canActivate: [OktaAuthGuard]
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent,
     canActivate: [OktaAuthGuard]
   },
   {
