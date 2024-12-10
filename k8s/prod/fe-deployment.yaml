@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: ng-deployment
+  namespace: production
+  labels:
+    app: ng-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ng-pod
+
+  template:
+    metadata:
+      name: ng-pod
+      labels:
+        app: ng-pod
+
+    spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: "topology.kubernetes.io/zone"
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app: ng-pod
+      
+      containers:
+        - name: ng-container
+          image: frontendvm
+          command: ["/entrypoint.sh", "production-gcp.hsc.com" , "Staging" , "8.0.0"]
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
