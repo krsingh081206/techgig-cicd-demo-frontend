@@ -29,7 +29,7 @@ export class OrderService {
 
   getOrderDetails(orderId: number) {
   return this.http.get<{ message: string, status: string, data: OrderDetails }>(
-    `http://localhost:8080/api/order/${orderId}`
+    `${this.baseUrl}/order/${orderId}`
   );
 }
 
