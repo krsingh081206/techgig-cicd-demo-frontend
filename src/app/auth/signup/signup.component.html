@@ -74,6 +74,8 @@
             name="age"
             [(ngModel)]="signupData.age"
             placeholder="Enter your age"
+            min="1"
+            max="99"
             required />
           <div *ngIf="validationErrors['age']" class="text-danger mt-1 small">
             {{ validationErrors['age'] }}

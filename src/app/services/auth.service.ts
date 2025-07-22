@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router'; // ✅ Import Router
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private baseUrl = `${environment.apiUrl}/auth`;
   private tokenKey = 'token';
 
   // ✅ Inject HttpClient and Router
@@ -15,6 +16,7 @@ export class AuthService {
 
   // API call to login
   login(data: { username: string; password: string }): Observable<any> {
+    console.log(`${this.baseUrl}/signin`);
     return this.http.post(`${this.baseUrl}/signin`, data);
   }
 

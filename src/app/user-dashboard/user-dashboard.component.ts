@@ -17,7 +17,7 @@ export class UserDashboardComponent implements OnInit {
   cart: { [key: number]: { product: Product; quantity: number } } = {};
   selectedCategory: string = '';
   minPrice: number = 0;
-  maxPrice: number = 9999999;
+  maxPrice: number = 10000;
 
   
 
