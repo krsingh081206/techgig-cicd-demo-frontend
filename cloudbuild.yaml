@@ -38,14 +38,16 @@ steps:
 
   # Deploy to Cloud Run 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    id: Deploy to Cloud Run
-    args:
-      - run
-      - deploy
-      - $_CLOUD_RUN_SERVICE
-      - --image=us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
-      - --region=$_REGION
-      - --platform=managed
-      - --ingress=all
-      - --allow-unauthenticated
-      - --port=80
+  id: Deploy to Cloud Run
+  entrypoint: gcloud
+  args:
+    - run
+    - deploy
+    - $_CLOUD_RUN_SERVICE
+    - --image=us-east4-docker.pkg.dev/$PROJECT_ID/techgig-cicd/$_IMAGE:$SHORT_SHA
+    - --region=$_REGION
+    - --platform=managed
+    - --ingress=all
+    - --allow-unauthenticated
+    - --port=80
+
